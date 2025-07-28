@@ -14,17 +14,19 @@ int main(int argc, char *argv[]) {
     }
 
     char *filename;
+    char *wl_prefix = "/usr/share/wayland-sessions/";
+    char *x_prefix = "/usr/share/xsessions/";
     char *dotdesktop = ".desktop";
     if (strcmp(argv[1], "w") == 0 || strcmp(argv[1], "wl") == 0 || strcmp(argv[1], "wayland") == 0) {
-            filename = malloc(strlen("/usr/share/wayland-sessions/") + strlen(argv[2]) + strlen(".desktop") + 1);
-            strcpy(filename, "/usr/share/wayland-sessions/");
+            filename = malloc(strlen(wl_prefix) + strlen(argv[2]) + strlen(".desktop") + 1);
+            strcpy(filename, wl_prefix);
             strcat(filename, argv[2]);
             if (strlen(filename) < strlen(dotdesktop) || strcmp(&filename[strlen(filename)-strlen(dotdesktop)], dotdesktop)) {
                 strcat(filename, dotdesktop);
             }
     } else if (strcmp(argv[1], "x") == 0 || strcmp(argv[1], "x11") == 0 || strcmp(argv[1], "xorg") == 0) {
-        filename = malloc(strlen("/usr/share/xsessions/") + strlen(argv[2]) + strlen(".desktop") + 1);
-        strcpy(filename, "/usr/share/xsessions/");
+        filename = malloc(strlen(x_prefix) + strlen(argv[2]) + strlen(".desktop") + 1);
+        strcpy(filename, x_prefix);
         strcat(filename, argv[2]);
         if (strlen(filename) < strlen(".desktop") || strcmp(&filename[strlen(filename)-strlen(".desktop")], ".desktop")) {
             strcat(filename, ".desktop");
